@@ -1,4 +1,6 @@
-class BankAccount {
+import BankStatement as BankStatement
+
+class BankAccount() {
 
     var balance: Double = 0.0
 
@@ -7,8 +9,11 @@ class BankAccount {
     }
 
     fun withdraw(amount: Double) {
-        if (amount > balance) throw Exception("Insufficient funds available")
-        balance -= amount
+        if (amount > balance) {
+            throw Exception("Insufficient funds available")
+        } else {
+            balance -= amount
+        }
     }
 
 }
