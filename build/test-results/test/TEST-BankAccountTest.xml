@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="BankAccountTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-02-16T10:58:16" hostname="Yasmins-Air" time="0.133">
+<testsuite name="BankAccountTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2021-02-16T12:07:21" hostname="Yasmins-Air" time="0.136">
   <properties/>
-  <testcase name="depositAddsToBalance()" classname="BankAccountTest" time="0.129"/>
-  <testcase name="balanceIs0ToStart()" classname="BankAccountTest" time="0.002"/>
+  <testcase name="Withdrawing more than balance throws error()" classname="BankAccountTest" time="0.087"/>
+  <testcase name="Withdrawal subtracts from balance()" classname="BankAccountTest" time="0.007"/>
+  <testcase name="Deposit adds to balance()" classname="BankAccountTest" time="0.008"/>
+  <testcase name="Balance is 0 to start()" classname="BankAccountTest" time="0.01"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

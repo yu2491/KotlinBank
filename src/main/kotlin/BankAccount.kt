@@ -6,4 +6,9 @@ class BankAccount {
         balance += amount
     }
 
+    fun withdraw(amount: Double) {
+        if (amount > balance) throw Exception("Insufficient funds available")
+        balance -= amount
+    }
+
 }
