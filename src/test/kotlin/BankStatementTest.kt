@@ -26,4 +26,13 @@ class BankStatementTest {
         assertEquals(expectedString,statement)
     }
 
+    @Test
+    fun `Returns correct format for debit amount`() {
+        val transaction = FakeTransaction()
+        subject.addDebitTransaction(transaction,4000.00)
+        val expectedString = "date || credit || debit || balance\n16/02/2021 || || 1000.00 || 4000.00"
+        val statement = subject.getStatement()
+        assertEquals(expectedString,statement)
+    }
+
 }

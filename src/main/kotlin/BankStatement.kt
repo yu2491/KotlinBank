@@ -10,4 +10,8 @@ class BankStatement {
     fun addCreditTransaction(transaction: Transaction, balance: Double) {
         transactions = "\n${transaction.getDate()} || ${transaction.getAmount()} || || ${"%.2f".format(balance)}" + transactions
     }
+
+    fun addDebitTransaction(transaction: Transaction, balance: Double) {
+        transactions = "\n${transaction.getDate()} || || ${transaction.getAmount()} || ${"%.2f".format(balance)}" + transactions
+    }
 }
