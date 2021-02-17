@@ -7,7 +7,7 @@ class BankAccountTest {
     val account = BankAccount()
 
     @Test
-    fun `Balance is 0 to start`() {
+    fun balanceis0tostart() {
         var balance = account.balance
         assertEquals(0.0, balance)
     }

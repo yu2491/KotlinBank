@@ -3,6 +3,7 @@ import BankStatement as BankStatement
 class BankAccount() {
 
     var balance: Double = 0.0
+    val statement: BankStatement = BankStatement()
 
     fun deposit(amount: Double) {
         balance += amount

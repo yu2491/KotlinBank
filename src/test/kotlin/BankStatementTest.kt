@@ -1,20 +1,22 @@
+import io.mockk.every
+import io.mockk.mockk
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
-import Transaction as Transaction
 
 class BankStatementTest {
 
-    class FakeCreditTransaction : Transaction {
-        override fun getDate() = "16/02/2021"
-        override fun getAmount() = "1000.00"
-    }
-
-    class FakeDebitTransaction : Transaction {
-        override fun getDate() = "17/02/2021"
-        override fun getAmount() = "250.00"
-    }
-
     val subject = BankStatement()
+    val creditTransaction = mockk<BankTransaction>()
+    val debitTransaction = mockk<BankTransaction>()
+
+    @BeforeEach
+    fun init() {
+        every { creditTransaction.getDate() } returns "16/02/2021"
+        every { creditTransaction.getAmount() } returns "1000.00"
+        every { debitTransaction.getDate() } returns "17/02/2021"
+        every { debitTransaction.getAmount() } returns "250.00"
+    }
 
     @Test
     fun `Returns just the header if no transactions are added`() {
@@ -24,31 +26,24 @@ class BankStatementTest {
 
     @Test
     fun `Returns correct format for credit amount`() {
-        val transaction = FakeCreditTransaction()
-        subject.addCreditTransaction(transaction,2000.00)
+        subject.addCreditTransaction(creditTransaction,2000.00)
         val expectedString = "date || credit || debit || balance\n16/02/2021 || 1000.00 || || 2000.00"
-        val statement = subject.getStatement()
-        assertEquals(expectedString,statement)
+        assertEquals(expectedString,subject.getStatement())
     }
 
     @Test
     fun `Returns correct format for debit amount`() {
-        val transaction = FakeDebitTransaction()
-        subject.addDebitTransaction(transaction,4000.00)
+        subject.addDebitTransaction(debitTransaction,4000.00)
         val expectedString = "date || credit || debit || balance\n17/02/2021 || || 250.00 || 4000.00"
-        val statement = subject.getStatement()
-        assertEquals(expectedString,statement)
+        assertEquals(expectedString,subject.getStatement())
     }
 
     @Test
     fun `Returns correct format for two transactions`() {
-        val transaction1 = FakeCreditTransaction()
-        val transaction2 = FakeDebitTransaction()
-        subject.addCreditTransaction(transaction1,1000.00)
-        subject.addDebitTransaction(transaction2,750.00)
+        subject.addCreditTransaction(creditTransaction,1000.00)
+        subject.addDebitTransaction(debitTransaction,750.00)
         val expectedString = "date || credit || debit || balance\n17/02/2021 || || 250.00 || 750.00\n16/02/2021 || 1000.00 || || 1000.00"
-        val statement = subject.getStatement()
-        assertEquals(expectedString,statement)
+        assertEquals(expectedString,subject.getStatement())
     }
 
 }
