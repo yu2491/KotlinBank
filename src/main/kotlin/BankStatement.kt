@@ -1,7 +1,7 @@
 class BankStatement {
 
-    private val header = "date || credit || debit || balance"
-    private var transactions = ""
+    private val header: String = "date || credit || debit || balance"
+    private var transactions: String = ""
 
     fun getStatement(): String {
         return header + transactions
