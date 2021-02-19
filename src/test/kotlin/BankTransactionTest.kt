@@ -4,7 +4,7 @@ import kotlin.test.assertEquals
 
 class BankTransactionTest {
 
-    val subject = BankTransaction("credit",1000.00, LocalDate.parse("2021-02-16"))
+    val subject = BankTransaction("credit",1000.00, LocalDate.parse("2021-02-16"),2000.00)
 
     @Test
     fun `it returns it date in string format`() {

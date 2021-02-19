@@ -1,17 +1,27 @@
-class BankStatement {
+class BankStatement(private val transactions: MutableList<BankTransaction> = mutableListOf()) {
 
     private val header: String = "date || credit || debit || balance"
-    private var transactions: String = ""
+
 
     fun getStatement(): String {
-        return header + transactions
+        return header + getTransactions()
     }
 
-    fun addCreditTransaction(transaction: BankTransaction, balance: Double) {
-        transactions = "\n${transaction.getDate()} || ${transaction.getAmount()} || || ${"%.2f".format(balance)}" + transactions
+    fun addTransaction(transaction: BankTransaction) {
+        transactions.add(transaction)
     }
 
-    fun addDebitTransaction(transaction: BankTransaction, balance: Double) {
-        transactions = "\n${transaction.getDate()} || || ${transaction.getAmount()} || ${"%.2f".format(balance)}" + transactions
+    private fun getTransactions(): String {
+        return transactions.map { transaction -> if(transaction.type == "credit")
+            creditTransactionAsString(transaction) else debitTransactionAsString(transaction) }
+            .asReversed().joinToString("")
+    }
+
+    private fun creditTransactionAsString(transaction: BankTransaction): String {
+        return "\n${transaction.getDate()} || ${transaction.getAmount()} || || ${transaction.getBalance()}"
+    }
+
+    private fun debitTransactionAsString(transaction: BankTransaction): String {
+        return "\n${transaction.getDate()} || || ${transaction.getAmount()} || ${transaction.getBalance()}"
     }
 }

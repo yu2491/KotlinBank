@@ -19,17 +19,17 @@ class BankAccountTest {
 
     @Test
     fun `Depositing adds a transaction to the statement`() {
-        every { statement.addCreditTransaction(any(),1000.00) } just runs
+        every { statement.addTransaction(any()) } just runs
         subject.deposit(1000.00)
-        verify { statement.addCreditTransaction(any(),1000.00) }
+        verify { statement.addTransaction(any()) }
     }
 
     @Test
     fun `Withdrawing adds a transaction to the statement`() {
         subject.balance = 1000.00
-        every { statement.addDebitTransaction(any(), 750.00) } just runs
+        every { statement.addTransaction(any()) } just runs
         subject.withdraw(250.00)
-        verify { statement.addDebitTransaction(any(), 750.00) }
+        verify { statement.addTransaction(any()) }
     }
 
     @Test
